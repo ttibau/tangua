@@ -1,0 +1,21 @@
+<ion-view style="" id="page2" title="Comunicados">
+    <ion-content class="has-header" padding="true">
+
+        <div class="list card" ng-repeat="comunicado in comunicados">
+            <div class="item item-avatar">
+                    <img src="../img/warning-icon.png">
+                    <h2>{{comunicado.titulo}}</h2>
+                    <p>{{comunicado.data}}</p>
+            </div>
+            <div class="item item-body">
+                    <img ng-src="{{comunicado.imagem}}">
+                    <p>
+                      {{comunicado.corpo}}
+                    </p>
+                    <p>
+                    <a href="#" class="subdued">Escrito por: {{comunicado.autor}} </a>
+                    </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
