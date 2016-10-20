@@ -1,17 +1,38 @@
 angular.module('app.controllers', [])
 
-.controller('comunicadosCtrl', ['$scope', '$stateParams', '$firebaseArray',
-function ($scope, $stateParams, $firebaseArray) {
+.controller('comunicadosCtrl', ['$scope', '$stateParams', '$firebaseArray', '$ionicLoading',
+function ($scope, $stateParams, $firebaseArray, $ionicLoading) {
   var ref = new Firebase("https://transporte-tangua.firebaseio.com/");
   $scope.comunicados = $firebaseArray(ref.child('comunicados'));
-  console.log($scope.comunicados);
+
+  $ionicLoading.show({
+    template: 'Carregando dados...'
+  });
+
+  $scope.comunicados.$loaded(
+    function (x) {
+      $ionicLoading.hide();
+    }, function (err) {
+      console.log(err);
+    });
 }])
 
-.controller('NibusCtrl', ['$scope', '$stateParams', '$firebaseArray',
-function ($scope, $stateParams, $firebaseArray) {
+.controller('NibusCtrl', ['$scope', '$stateParams', '$firebaseArray', '$ionicLoading',
+function ($scope, $stateParams, $firebaseArray, $ionicLoading) {
   var ref = new Firebase("https://transporte-tangua.firebaseio.com/");
   $scope.buses = $firebaseArray(ref.child('onibus'));
-  console.log($scope.buses);
+
+  $ionicLoading.show({
+    template: 'Carregando dados...'
+  });
+
+  $scope.buses.$loaded(
+    function (x) {
+      $ionicLoading.hide();
+    }, function(err){
+      console.log(err);
+    });
+
 }])
 
 .controller("duvidasCtrl", function($scope){
@@ -24,4 +45,5 @@ function ($scope, $stateParams, $firebaseArray) {
   $scope.representantes = $firebaseArray(ref.child('coordenacao').child('representantes'));
   $scope.coordenadores = $firebaseArray(ref.child('coordenacao').child('coordenadores'));
   console.log($scope.representantes);
+
 })
